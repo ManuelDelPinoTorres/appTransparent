@@ -29,20 +29,21 @@ class MedirTiempoRespuestaView(View):
                 
                 # almacenamos la informacion en un diccionario y la pasamos por json
                 data={
-                    'tiempoRespuesta':tiempoRespuesta,
-                    'statusCode':statusCode
+                    'status':statusCode,
+                    'time':tiempoRespuesta
+                    
                 }
                 return JsonResponse(data)
             # recogemos la excepcion en caso de que no se pueda realizar la peticion
             
             except requests.exceptions.RequestException:
                 data={
-                    'error':'No se ha podido realizar la peticion'
+                    'error':'The request could not be made'
                 }
                 return JsonResponse(data, status=500)
         else:
             data={
-                'error':'Parametro del dominio faltante'
+                'error':'The URL should have ip or domain'
             }
             
             return JsonResponse(data, status=400)
